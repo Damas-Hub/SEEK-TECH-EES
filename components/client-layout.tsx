@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import React from "react"
+import React from "react";
 
-import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { Badge } from "@/components/ui/badge"
-import { useIsMobile } from "@/hooks/use-mobile"
-import { Button } from "@/components/ui/button"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Input } from "@/components/ui/input"
-import { useState } from "react"
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 import {
   FiTool,
   FiShoppingBag,
@@ -19,22 +19,29 @@ import {
   FiLogOut,
   FiSearch,
   FiMenu,
-} from "react-icons/fi"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+} from "react-icons/fi";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import Image from "next/image";
 
 interface ClientLayoutProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export function ClientLayout({ children }: ClientLayoutProps) {
-  const pathname = usePathname()
-  const isMobile = useIsMobile()
-  const router = useRouter()
-  const [searchQuery, setSearchQuery] = useState("")
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+  const pathname = usePathname();
+  const isMobile = useIsMobile();
+  const router = useRouter();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   // Mock cart count - in a real app, this would come from a state management solution
-  const cartCount = 3
+  const cartCount = 3;
 
   const navigation = [
     {
@@ -68,19 +75,19 @@ export function ClientLayout({ children }: ClientLayoutProps) {
       icon: <FiUser size={24} />,
       current: pathname === "/client/profile",
     },
-  ]
+  ];
 
   const handleLogout = () => {
     // In a real app, you would handle logout with an API
-    console.log("Logging out...")
-    router.push("/")
-  }
+    console.log("Logging out...");
+    router.push("/");
+  };
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Searching for:", searchQuery)
+    e.preventDefault();
+    console.log("Searching for:", searchQuery);
     // In a real app, you would implement search functionality
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
@@ -89,10 +96,18 @@ export function ClientLayout({ children }: ClientLayoutProps) {
         <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-40">
           <div className="container mx-auto px-4 py-3 flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2">
-              <div className="bg-blue-600 text-white p-1.5 rounded-full">
-                <FiTool size={20} />
+              <div>
+                <Image
+                  src="/assets/logo.png"
+                  alt="Logo"
+                  width={50}
+                  height={20}
+                  className="rounded-full"
+                />
               </div>
-              <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro</h1>
+              <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">
+                SleekTech
+              </h1>
             </Link>
 
             <div className="flex items-center gap-2">
@@ -108,9 +123,17 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                   <SheetHeader className="mb-6">
                     <SheetTitle className="text-left flex items-center gap-2">
                       <div className="bg-blue-600 text-white p-1.5 rounded-full">
-                        <FiTool size={20} />
+                        <Image
+                          src="/assets/logo.png"
+                          alt="Logo"
+                          width={50}
+                          height={20}
+                          className="rounded-full"
+                        />
                       </div>
-                      <span className="text-blue-800 dark:text-blue-400">RepairPro</span>
+                      <span className="text-blue-800 dark:text-blue-400">
+                        Sleek Tech
+                      </span>
                     </SheetTitle>
                   </SheetHeader>
 
@@ -127,7 +150,10 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                           }`}
                           onClick={() => setIsDrawerOpen(false)}
                         >
-                          {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
+                          {React.cloneElement(
+                            item.icon as React.ReactElement<any>,
+                            { size: 20 }
+                          )}
                           <span>{item.name}</span>
                           {item.badge && (
                             <Badge className="ml-auto" variant="destructive">
@@ -139,11 +165,13 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                     </div>
 
                     <div className="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700">
-                
-
                       <div className="flex items-center justify-between">
                         <ThemeToggle />
-                        <Button variant="outline" onClick={handleLogout} className="flex items-center gap-2">
+                        <Button
+                          variant="outline"
+                          onClick={handleLogout}
+                          className="flex items-center gap-2"
+                        >
                           <FiLogOut size={16} />
                           Logout
                         </Button>
@@ -162,10 +190,18 @@ export function ClientLayout({ children }: ClientLayoutProps) {
         <header className="bg-white dark:bg-gray-800 shadow-sm">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <Link href="/" className="flex items-center gap-2">
-              <div className="bg-blue-600 text-white p-1.5 rounded-full">
-                <FiTool size={20} />
+              <div>
+                <Image
+                  src="/assets/logo.png"
+                  alt="Logo"
+                  width={50}
+                  height={20}
+                  className="rounded-full"
+                />
               </div>
-              <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro</h1>
+              <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">
+                Sleek Tech
+              </h1>
             </Link>
 
             <div className="flex-1 max-w-md mx-4">
@@ -177,7 +213,12 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
-                <Button type="submit" size="sm" variant="ghost" className="absolute right-0 top-0 h-full">
+                <Button
+                  type="submit"
+                  size="sm"
+                  variant="ghost"
+                  className="absolute right-0 top-0 h-full"
+                >
                   <FiSearch size={16} />
                 </Button>
               </form>
@@ -196,11 +237,16 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                     }`}
                   >
                     {item.badge && (
-                      <Badge className="absolute -top-3 -right-3 px-1.5 py-0.5 text-xs" variant="destructive">
+                      <Badge
+                        className="absolute -top-3 -right-3 px-1.5 py-0.5 text-xs"
+                        variant="destructive"
+                      >
                         {item.badge}
                       </Badge>
                     )}
-                    {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
+                    {React.cloneElement(item.icon as React.ReactElement<any>, {
+                      size: 20,
+                    })}
                     <span>{item.name}</span>
                   </Link>
                 ))}
@@ -208,7 +254,12 @@ export function ClientLayout({ children }: ClientLayoutProps) {
 
               <ThemeToggle />
 
-              <Button variant="outline" size="sm" onClick={handleLogout} className="ml-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="ml-4"
+              >
                 <FiLogOut className="h-4 w-4 mr-2" />
                 Logout
               </Button>
@@ -218,7 +269,11 @@ export function ClientLayout({ children }: ClientLayoutProps) {
       )}
 
       {/* Main content */}
-      <main className={`container mx-auto px-4 py-6 ${isMobile ? "pb-20" : ""}`}>{children}</main>
+      <main
+        className={`container mx-auto px-4 py-6 ${isMobile ? "pb-20" : ""}`}
+      >
+        {children}
+      </main>
 
       {/* Mobile bottom navigation - we'll keep this for quick access to main sections */}
       {isMobile && (
@@ -235,7 +290,10 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                 }`}
               >
                 {item.badge && (
-                  <Badge className="absolute -top-1 -right-1 px-1.5 py-0.5 text-xs" variant="destructive">
+                  <Badge
+                    className="absolute -top-1 -right-1 px-1.5 py-0.5 text-xs"
+                    variant="destructive"
+                  >
                     {item.badge}
                   </Badge>
                 )}
@@ -247,5 +305,5 @@ export function ClientLayout({ children }: ClientLayoutProps) {
         </div>
       )}
     </div>
-  )
+  );
 }

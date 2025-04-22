@@ -132,9 +132,15 @@ export default function RepairsPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
-                <div className="bg-blue-600 text-white p-1.5 rounded-full">
-                  <FiTool size={20} />
-                </div>
+              <div>
+  <Image
+    src="/assets/logo.png"
+    alt="Logo"
+    width={50}
+    height={20}
+    className="rounded-full"
+  />
+</div>
                 <h3 className="text-lg font-bold">SleekTech</h3>
               </Link>
               <p className="text-gray-300">
