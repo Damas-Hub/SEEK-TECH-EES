@@ -52,7 +52,7 @@ const mockMessages = [
 export default function MessagesPage() {
   const searchParams = useSearchParams()
   const [conversations, setConversations] = useState(mockConversations)
-  const [activeConversation, setActiveConversation] = useState(mockConversations[0])
+  const [activeConversation, setActiveConversation] = useState<typeof mockConversations[0] | null>(mockConversations[0])
   const [messages, setMessages] = useState(mockMessages)
   const [newMessage, setNewMessage] = useState("")
   const messagesEndRef = useRef<HTMLDivElement>(null)

@@ -127,7 +127,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                           }`}
                           onClick={() => setIsDrawerOpen(false)}
                         >
-                          {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                          {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
                           <span>{item.name}</span>
                           {item.badge && (
                             <Badge className="ml-auto" variant="destructive">
@@ -200,7 +200,7 @@ export function ClientLayout({ children }: ClientLayoutProps) {
                         {item.badge}
                       </Badge>
                     )}
-                    {React.cloneElement(item.icon as React.ReactElement, { size: 20 })}
+                    {React.cloneElement(item.icon as React.ReactElement<any>, { size: 20 })}
                     <span>{item.name}</span>
                   </Link>
                 ))}
