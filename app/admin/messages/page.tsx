@@ -66,7 +66,8 @@ const mockMessages = [
   {
     id: "2",
     sender: "You",
-    content: "Yes, we do repair iPhone 13 screens. The cost is $79.99 and it usually takes about 2 hours to complete.",
+    content:
+      "Yes, we do repair iPhone 13 screens. The cost is GH₵79.99 and it usually takes about 2 hours to complete.",
     time: "10:28 AM",
     isUser: true,
   },
@@ -109,8 +110,8 @@ export default function AdminMessagesPage() {
     <div className="h-[calc(100vh-120px)]">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
         {/* Conversations List */}
-        <Card className="lg:col-span-1 overflow-hidden flex flex-col">
-          <CardHeader className="px-4 py-3 border-b">
+        <Card className="lg:col-span-1 overflow-hidden flex flex-col dark:border-gray-700">
+          <CardHeader className="px-4 py-3 border-b dark:border-gray-700">
             <div className="flex justify-between items-center">
               <CardTitle className="text-lg">Messages</CardTitle>
               <Button variant="outline" size="sm">
@@ -133,10 +134,10 @@ export default function AdminMessagesPage() {
               </Button>
             </div>
           </CardHeader>
-          <div className="p-2 border-b">
-            <Input placeholder="Search messages..." className="w-full" />
+          <div className="p-2 border-b dark:border-gray-700">
+            <Input placeholder="Search messages..." className="w-full dark:bg-gray-700 dark:border-gray-600" />
           </div>
-          <div className="p-2 border-b">
+          <div className="p-2 border-b dark:border-gray-700">
             <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab}>
               <TabsList className="w-full">
                 <TabsTrigger value="all" className="flex-1">
@@ -155,27 +156,29 @@ export default function AdminMessagesPage() {
             </Tabs>
           </div>
           <CardContent className="flex-1 overflow-y-auto p-0">
-            <div className="divide-y">
+            <div className="divide-y dark:divide-gray-700">
               {filteredConversations.map((conversation) => (
                 <div
                   key={conversation.id}
-                  className={`flex items-center gap-3 p-4 hover:bg-gray-50 cursor-pointer ${
-                    activeConversation?.id === conversation.id ? "bg-blue-50" : ""
+                  className={`flex items-center gap-3 p-4 hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer ${
+                    activeConversation?.id === conversation.id ? "bg-blue-50 dark:bg-blue-900/30" : ""
                   }`}
                   onClick={() => setActiveConversation(conversation)}
                 >
                   <Avatar>
-                    <AvatarFallback className="bg-blue-100 text-blue-800">{conversation.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                      {conversation.name.charAt(0)}
+                    </AvatarFallback>
                   </Avatar>
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-center">
                       <h3 className="font-medium truncate">{conversation.name}</h3>
-                      <span className="text-xs text-gray-500">{conversation.time}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">{conversation.time}</span>
                     </div>
-                    <p className="text-sm text-gray-600 truncate">{conversation.lastMessage}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 truncate">{conversation.lastMessage}</p>
                   </div>
                   {conversation.unread && (
-                    <Badge variant="default" className="bg-blue-600">
+                    <Badge variant="default" className="bg-blue-600 dark:bg-blue-500">
                       New
                     </Badge>
                   )}
@@ -186,18 +189,18 @@ export default function AdminMessagesPage() {
         </Card>
 
         {/* Chat Area */}
-        <Card className="lg:col-span-2 overflow-hidden flex flex-col">
-          <CardHeader className="px-4 py-3 border-b">
+        <Card className="lg:col-span-2 overflow-hidden flex flex-col dark:border-gray-700">
+          <CardHeader className="px-4 py-3 border-b dark:border-gray-700">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarFallback className="bg-blue-100 text-blue-800">
+                  <AvatarFallback className="bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
                     {activeConversation?.name.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div>
                   <CardTitle className="text-lg">{activeConversation?.name}</CardTitle>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
                     {activeConversation?.type === "repair"
                       ? "Repair Inquiry"
                       : activeConversation?.type === "order"
@@ -244,17 +247,21 @@ export default function AdminMessagesPage() {
               </div>
             </div>
           </CardHeader>
-          <CardContent className="flex-1 overflow-y-auto p-4 bg-gray-50">
+          <CardContent className="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900">
             <div className="space-y-4">
               {messages.map((message) => (
                 <div key={message.id} className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}>
                   <div
                     className={`max-w-[80%] rounded-lg p-3 ${
-                      message.isUser ? "bg-blue-600 text-white" : "bg-white border"
+                      message.isUser
+                        ? "bg-blue-600 text-white dark:bg-blue-700"
+                        : "bg-white border dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
                     }`}
                   >
                     <p>{message.content}</p>
-                    <p className={`text-xs mt-1 ${message.isUser ? "text-blue-100" : "text-gray-500"}`}>
+                    <p
+                      className={`text-xs mt-1 ${message.isUser ? "text-blue-100" : "text-gray-500 dark:text-gray-400"}`}
+                    >
                       {message.time}
                     </p>
                   </div>
@@ -262,13 +269,13 @@ export default function AdminMessagesPage() {
               ))}
             </div>
           </CardContent>
-          <div className="p-4 border-t">
+          <div className="p-4 border-t dark:border-gray-700">
             <form onSubmit={handleSendMessage} className="flex gap-2">
               <Input
                 placeholder="Type your message..."
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
-                className="flex-1"
+                className="flex-1 dark:bg-gray-700 dark:border-gray-600"
               />
               <Button type="submit">
                 <svg

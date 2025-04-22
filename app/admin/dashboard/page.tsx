@@ -86,7 +86,7 @@ export default function DashboardPage() {
     },
     {
       title: "Revenue",
-      value: "$12,456",
+      value: "GH₵12,456",
       change: "+18%",
       changeType: "increase",
       icon: (
@@ -360,7 +360,7 @@ export default function DashboardPage() {
                   <p className="font-medium">Add Repair</p>
                 </div>
               </Link>
-              <Link href="/admin/orders/add">
+              <Link href="/admin/store/add">
                 <div className="border rounded-lg p-4 text-center hover:bg-green-50 hover:border-green-200 transition-colors">
                   <div className="bg-green-100 p-2 rounded-full w-12 h-12 mx-auto mb-3 flex items-center justify-center text-green-600">
                     <svg
@@ -379,10 +379,10 @@ export default function DashboardPage() {
                       <path d="M12 5v14" />
                     </svg>
                   </div>
-                  <p className="font-medium">Add Order</p>
+                  <p className="font-medium">Add Store Item</p>
                 </div>
               </Link>
-              <Link href="/admin/clients/add">
+              <Link href="/admin/clients">
                 <div className="border rounded-lg p-4 text-center hover:bg-yellow-50 hover:border-yellow-200 transition-colors">
                   <div className="bg-yellow-100 p-2 rounded-full w-12 h-12 mx-auto mb-3 flex items-center justify-center text-yellow-600">
                     <svg
@@ -395,16 +395,18 @@ export default function DashboardPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-plus"
+                      className="lucide lucide-user-plus"
                     >
-                      <path d="M5 12h14" />
-                      <path d="M12 5v14" />
+                      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                      <circle cx="9" cy="7" r="4" />
+                      <line x1="19" x2="19" y1="8" y2="14" />
+                      <line x1="22" x2="16" y1="11" y2="11" />
                     </svg>
                   </div>
                   <p className="font-medium">Add Client</p>
                 </div>
               </Link>
-              <Link href="/admin/messages/new">
+              <Link href="/admin/messages">
                 <div className="border rounded-lg p-4 text-center hover:bg-red-50 hover:border-red-200 transition-colors">
                   <div className="bg-red-100 p-2 rounded-full w-12 h-12 mx-auto mb-3 flex items-center justify-center text-red-600">
                     <svg
@@ -417,13 +419,12 @@ export default function DashboardPage() {
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      className="lucide lucide-plus"
+                      className="lucide lucide-message-circle"
                     >
-                      <path d="M5 12h14" />
-                      <path d="M12 5v14" />
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
                     </svg>
                   </div>
-                  <p className="font-medium">New Message</p>
+                  <p className="font-medium">Messages</p>
                 </div>
               </Link>
             </div>
