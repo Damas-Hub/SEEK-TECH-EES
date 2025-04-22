@@ -1,75 +1,82 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { StoreItemCard } from "@/components/store-item-card"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { FiTool } from "react-icons/fi"
+import { useState } from "react";
+import { StoreItemCard } from "@/components/store-item-card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Menu } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { FiTool } from "react-icons/fi";
+import Image from "next/image";
 
 // Mock data for store items
 const storeItems = [
   {
     id: "1",
     title: "Smartphone Screen Protector",
-    description: "Tempered glass screen protector for all smartphone models. 9H hardness, anti-scratch.",
+    description:
+      "Tempered glass screen protector for all smartphone models. 9H hardness, anti-scratch.",
     price: 12.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "2",
     title: "Laptop Cooling Pad",
-    description: "USB powered cooling pad with 5 fans. Compatible with laptops up to 17 inches.",
+    description:
+      "USB powered cooling pad with 5 fans. Compatible with laptops up to 17 inches.",
     price: 29.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "3",
     title: "Wireless Mouse",
-    description: "Ergonomic wireless mouse with 1600 DPI. Compatible with Windows and Mac.",
+    description:
+      "Ergonomic wireless mouse with 1600 DPI. Compatible with Windows and Mac.",
     price: 19.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "4",
     title: "USB-C to HDMI Adapter",
-    description: "Connect your USB-C device to any HDMI display. 4K@60Hz support.",
+    description:
+      "Connect your USB-C device to any HDMI display. 4K@60Hz support.",
     price: 15.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "5",
     title: "External Hard Drive",
-    description: "1TB portable external hard drive. USB 3.0, compatible with Windows and Mac.",
+    description:
+      "1TB portable external hard drive. USB 3.0, compatible with Windows and Mac.",
     price: 59.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "6",
     title: "Bluetooth Speaker",
-    description: "Portable Bluetooth speaker with 10-hour battery life. Water-resistant.",
+    description:
+      "Portable Bluetooth speaker with 10-hour battery life. Water-resistant.",
     price: 39.99,
     image: "/placeholder.svg?height=200&width=300",
   },
-]
+];
 
 export default function StorePage() {
-  const [cart, setCart] = useState<string[]>([])
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [cart, setCart] = useState<string[]>([]);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const addToCart = (itemId: string) => {
     if (!cart.includes(itemId)) {
-      setCart([...cart, itemId])
+      setCart([...cart, itemId]);
     }
-  }
+  };
 
   const removeFromCart = (itemId: string) => {
-    setCart(cart.filter((id) => id !== itemId))
-  }
+    setCart(cart.filter((id) => id !== itemId));
+  };
 
-  const isInCart = (itemId: string) => cart.includes(itemId)
+  const isInCart = (itemId: string) => cart.includes(itemId);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
@@ -77,10 +84,18 @@ export default function StorePage() {
       <header className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="bg-blue-600 text-white p-1.5 rounded-full">
-              <FiTool size={20} />
+            <div>
+              <Image
+                src="/assets/logo.png"
+                alt="Logo"
+                width={50}
+                height={20}
+                className="rounded-full"
+              />
             </div>
-            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro</h1>
+            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">
+              Sleek Tech
+            </h1>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link
@@ -89,7 +104,10 @@ export default function StorePage() {
             >
               Repairs
             </Link>
-            <Link href="/store" className="text-blue-600 dark:text-blue-400 font-medium">
+            <Link
+              href="/store"
+              className="text-blue-600 dark:text-blue-400 font-medium"
+            >
               Store
             </Link>
             <Link
@@ -156,7 +174,9 @@ export default function StorePage() {
 
       <div className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-blue-800 dark:text-blue-400">Store Items</h1>
+          <h1 className="text-2xl font-bold text-blue-800 dark:text-blue-400">
+            Store Items
+          </h1>
           {cart.length > 0 && (
             <Link href="/login">
               <Button className="flex items-center gap-2">
@@ -203,35 +223,54 @@ export default function StorePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
-                <div className="bg-blue-600 text-white p-1.5 rounded-full">
-                  <FiTool size={20} />
-                </div>
-                <h3 className="text-lg font-bold">RepairPro</h3>
+                  <div>
+                                  <Image
+                                    src="/assets/logo.png"
+                                    alt="Logo"
+                                    width={50}
+                                    height={20}
+                                    className="rounded-full"
+                                  />
+                                </div>
+                <h3 className="text-lg font-bold">SleekTech</h3>
               </Link>
               <p className="text-gray-300">
-                Professional repair services and quality tech accessories for all your needs.
+                Professional repair services and quality tech accessories for
+                all your needs.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/repairs" className="text-gray-300 hover:text-white">
+                  <Link
+                    href="/repairs"
+                    className="text-gray-300 hover:text-white"
+                  >
                     Repair Services
                   </Link>
                 </li>
                 <li>
-                  <Link href="/store" className="text-gray-300 hover:text-white">
+                  <Link
+                    href="/store"
+                    className="text-gray-300 hover:text-white"
+                  >
                     Store
                   </Link>
                 </li>
                 <li>
-                  <Link href="/login" className="text-gray-300 hover:text-white">
+                  <Link
+                    href="/login"
+                    className="text-gray-300 hover:text-white"
+                  >
                     Login
                   </Link>
                 </li>
                 <li>
-                  <Link href="/register" className="text-gray-300 hover:text-white">
+                  <Link
+                    href="/register"
+                    className="text-gray-300 hover:text-white"
+                  >
                     Register
                   </Link>
                 </li>
@@ -248,10 +287,12 @@ export default function StorePage() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; {new Date().getFullYear()} RepairPro. All rights reserved.</p>
+            <p>
+              &copy; {new Date().getFullYear()} SleekTechEES. All rights reserved.
+            </p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }

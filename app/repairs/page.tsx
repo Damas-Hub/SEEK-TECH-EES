@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { FiTool } from "react-icons/fi"
+import Image from "next/image"
 
 // Mock data for repair services
 const repairs = [
@@ -58,10 +59,16 @@ export default function RepairsPage() {
       <header className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div className="bg-blue-600 text-white p-1.5 rounded-full">
-              <FiTool size={20} />
-            </div>
-            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro</h1>
+             <div >
+                             <Image
+                               src="/assets/logo.png"
+                               alt="Logo"
+                               width={50}
+                               height={20}
+                               className="rounded-full"
+                             />
+                           </div>
+            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">Sleek Tech</h1>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link href="/repairs" className="text-blue-600 dark:text-blue-400 font-medium">
@@ -128,7 +135,7 @@ export default function RepairsPage() {
                 <div className="bg-blue-600 text-white p-1.5 rounded-full">
                   <FiTool size={20} />
                 </div>
-                <h3 className="text-lg font-bold">RepairPro</h3>
+                <h3 className="text-lg font-bold">SleekTech</h3>
               </Link>
               <p className="text-gray-300">
                 Professional repair services and quality tech accessories for all your needs.
@@ -170,7 +177,7 @@ export default function RepairsPage() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>&copy; {new Date().getFullYear()} RepairPro. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} SleekTechEES. All rights reserved.</p>
           </div>
         </div>
       </footer>

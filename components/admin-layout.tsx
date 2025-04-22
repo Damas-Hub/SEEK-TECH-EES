@@ -35,6 +35,7 @@ import {
   FiMenu,
 } from "react-icons/fi"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import Image from "next/image"
 
 interface AdminLayoutProps {
   children: React.ReactNode
@@ -115,7 +116,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
             <div className="bg-blue-600 text-white p-1.5 rounded-full">
               <FiTool size={20} />
             </div>
-            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro Admin</h1>
+            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">SleekTech Admin</h1>
           </Link>
 
           <div className="flex items-center gap-2">
@@ -133,7 +134,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
                     <div className="bg-blue-600 text-white p-1.5 rounded-full">
                       <FiTool size={20} />
                     </div>
-                    <span className="text-blue-800 dark:text-blue-400">RepairPro Admin</span>
+                    <span className="text-blue-800 dark:text-blue-400">SleekTech Admin</span>
                   </SheetTitle>
                 </SheetHeader>
 
@@ -206,10 +207,16 @@ export function AdminLayout({ children }: AdminLayoutProps) {
         <Sidebar className="dark:bg-gray-800 dark:border-gray-700 bg-white border-r border-gray-200 shadow-sm">
           <SidebarHeader className="border-b p-4 bg-white dark:bg-gray-800 dark:border-gray-700">
             <Link href="/" className="flex items-center gap-2">
-              <div className="bg-blue-600 text-white p-1.5 rounded-full">
-                <FiTool size={20} />
-              </div>
-              <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro</h1>
+               <div>
+                               <Image
+                                 src="/assets/logo.png"
+                                 alt="Logo"
+                                 width={50}
+                                 height={20}
+                                 className="rounded-full"
+                               />
+                             </div>
+              <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">Sleek Tech</h1>
             </Link>
           </SidebarHeader>
           <SidebarContent className="bg-white dark:bg-gray-800">

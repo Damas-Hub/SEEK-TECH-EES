@@ -10,7 +10,7 @@ import { useSearchParams } from "next/navigation"
 const mockConversations = [
   {
     id: "1",
-    name: "RepairPro Support",
+    name: "SleekTech Support",
     lastMessage: "How can I help you with your repair?",
     time: "10:30 AM",
     unread: true,
@@ -28,7 +28,7 @@ const mockConversations = [
 const mockMessages = [
   {
     id: "1",
-    sender: "RepairPro Support",
+    sender: "SleekTech Support",
     content: "Hello! How can I help you today?",
     time: "10:25 AM",
     isUser: false,
@@ -42,7 +42,7 @@ const mockMessages = [
   },
   {
     id: "3",
-    sender: "RepairPro Support",
+    sender: "SleekTech Support",
     content: "Great! We offer screen repairs for all major smartphone models. Could you tell me which model you have?",
     time: "10:30 AM",
     isUser: false,
@@ -103,7 +103,7 @@ export default function MessagesPage() {
     setTimeout(() => {
       const responseMessage = {
         id: (Date.now() + 1).toString(),
-        sender: "RepairPro Support",
+        sender: "SleekTech Support",
         content: "Thank you for your message. A technician will respond to your inquiry shortly.",
         time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
         isUser: false,

@@ -15,8 +15,8 @@ import { useToast } from "@/hooks/use-toast"
 export default function SettingsPage() {
   const { toast } = useToast()
   const [generalSettings, setGeneralSettings] = useState({
-    storeName: "RepairPro",
-    storeEmail: "info@repairpro.com",
+    storeName: "SleekTech Repair",
+    storeEmail: "info@sleektechees.com",
     storePhone: "+1 234 567 890",
     storeAddress: "123 Repair Street, Tech City, TC 12345",
   })
