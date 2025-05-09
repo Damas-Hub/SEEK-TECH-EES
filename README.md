@@ -1,4 +1,3 @@
-
 # 🔧 Repairer & Store Management System
 
 A full-stack web application built with **Next.js** and **Firebase** that allows a **Repairer (Super Admin)** to manage repair services and store items, while **Clients** can browse, inquire, and request services or products.
