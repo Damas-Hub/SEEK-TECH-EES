@@ -67,6 +67,4 @@ A full-stack web application built with **Next.js** and **Firebase** that allows
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+ 
