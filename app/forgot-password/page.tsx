@@ -20,7 +20,6 @@ export default function ForgotPasswordPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // In a real app, you would call an API to send a password reset email
     setTimeout(() => {
       setIsSubmitting(false)
       setIsSubmitted(true)
