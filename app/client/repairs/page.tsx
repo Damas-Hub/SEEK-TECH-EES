@@ -1,4 +1,8 @@
+"use client"
+
+import { useState } from "react"
 import { RepairCard } from "@/components/repair-card"
+import { SearchBar } from "@/components/search-bar"
 
 // Mock data for repair services
 const repairs = [
@@ -48,14 +52,59 @@ const repairs = [
 ]
 
 export default function RepairsPage() {
+  const [searchQuery, setSearchQuery] = useState("")
+
+  // Filter repairs based on search query
+  const filteredRepairs = repairs.filter((repair) => {
+    if (!searchQuery.trim()) return true
+
+    const query = searchQuery.toLowerCase()
+    return repair.title.toLowerCase().includes(query) || repair.description.toLowerCase().includes(query)
+  })
+
   return (
     <div>
-      <h1 className="text-2xl font-bold text-blue-800 mb-6">Repair Services</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {repairs.map((repair) => (
-          <RepairCard key={repair.id} repair={repair} />
-        ))}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <h1 className="text-2xl font-bold text-blue-800 dark:text-blue-400">Repair Services</h1>
+        <SearchBar
+          placeholder="Search repair services..."
+          onSearch={setSearchQuery}
+          initialQuery={searchQuery}
+          className="w-full md:w-64"
+        />
       </div>
+
+      {filteredRepairs.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 mb-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-search"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </div>
+          <h2 className="text-xl font-medium mb-2">No repair services found</h2>
+          <p className="text-gray-500 dark:text-gray-400">
+            We couldn't find any repair services matching "{searchQuery}". Try a different search term.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredRepairs.map((repair) => (
+            <RepairCard key={repair.id} repair={repair} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

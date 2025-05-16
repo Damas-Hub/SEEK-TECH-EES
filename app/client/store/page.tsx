@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { SearchBar } from "@/components/search-bar"
 
 // Mock data for store items
 const storeItems = [
@@ -62,6 +63,7 @@ export default function StorePage() {
   const [loginDialogOpen, setLoginDialogOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false) // In a real app, this would come from auth state
   const [loginForm, setLoginForm] = useState({ email: "", password: "" })
+  const [searchQuery, setSearchQuery] = useState("")
 
   const addToCart = (itemId: string) => {
     if (!cart.includes(itemId)) {
@@ -96,44 +98,87 @@ export default function StorePage() {
     }
   }
 
+  // Filter items based on search query
+  const filteredItems = storeItems.filter((item) => {
+    if (!searchQuery.trim()) return true
+
+    const query = searchQuery.toLowerCase()
+    return item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query)
+  })
+
   return (
     <>
       <div>
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
           <h1 className="text-2xl font-bold text-blue-800">Store Items</h1>
-          {cart.length > 0 && (
-            <Button onClick={handleViewCart} className="flex items-center gap-2">
+          <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
+            <SearchBar
+              placeholder="Search store items..."
+              onSearch={setSearchQuery}
+              initialQuery={searchQuery}
+              className="w-full md:w-64"
+            />
+            {cart.length > 0 && (
+              <Button onClick={handleViewCart} className="flex items-center gap-2 whitespace-nowrap">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="lucide lucide-shopping-cart"
+                >
+                  <circle cx="8" cy="21" r="1" />
+                  <circle cx="19" cy="21" r="1" />
+                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                </svg>
+                View Cart ({cart.length})
+              </Button>
+            )}
+          </div>
+        </div>
+
+        {filteredItems.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="lucide lucide-shopping-cart"
+                className="lucide lucide-search"
               >
-                <circle cx="8" cy="21" r="1" />
-                <circle cx="19" cy="21" r="1" />
-                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
               </svg>
-              View Cart ({cart.length})
-            </Button>
-          )}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {storeItems.map((item) => (
-            <StoreItemCard
-              key={item.id}
-              item={item}
-              isInCart={isInCart(item.id)}
-              onAddToCart={() => addToCart(item.id)}
-              onRemoveFromCart={() => removeFromCart(item.id)}
-            />
-          ))}
-        </div>
+            </div>
+            <h2 className="text-xl font-medium mb-2">No items found</h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              We couldn't find any items matching "{searchQuery}". Try a different search term.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredItems.map((item) => (
+              <StoreItemCard
+                key={item.id}
+                item={item}
+                isInCart={isInCart(item.id)}
+                onAddToCart={() => addToCart(item.id)}
+                onRemoveFromCart={() => removeFromCart(item.id)}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Login Dialog */}

@@ -1,82 +1,85 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { StoreItemCard } from "@/components/store-item-card";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
-import { FiTool } from "react-icons/fi";
-import Image from "next/image";
+import { useState } from "react"
+import { StoreItemCard } from "@/components/store-item-card"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Menu } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle"
+import { FiTool } from "react-icons/fi"
+import { SearchBar } from "@/components/search-bar"
 
 // Mock data for store items
 const storeItems = [
   {
     id: "1",
     title: "Smartphone Screen Protector",
-    description:
-      "Tempered glass screen protector for all smartphone models. 9H hardness, anti-scratch.",
+    description: "Tempered glass screen protector for all smartphone models. 9H hardness, anti-scratch.",
     price: 12.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "2",
     title: "Laptop Cooling Pad",
-    description:
-      "USB powered cooling pad with 5 fans. Compatible with laptops up to 17 inches.",
+    description: "USB powered cooling pad with 5 fans. Compatible with laptops up to 17 inches.",
     price: 29.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "3",
     title: "Wireless Mouse",
-    description:
-      "Ergonomic wireless mouse with 1600 DPI. Compatible with Windows and Mac.",
+    description: "Ergonomic wireless mouse with 1600 DPI. Compatible with Windows and Mac.",
     price: 19.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "4",
     title: "USB-C to HDMI Adapter",
-    description:
-      "Connect your USB-C device to any HDMI display. 4K@60Hz support.",
+    description: "Connect your USB-C device to any HDMI display. 4K@60Hz support.",
     price: 15.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "5",
     title: "External Hard Drive",
-    description:
-      "1TB portable external hard drive. USB 3.0, compatible with Windows and Mac.",
+    description: "1TB portable external hard drive. USB 3.0, compatible with Windows and Mac.",
     price: 59.99,
     image: "/placeholder.svg?height=200&width=300",
   },
   {
     id: "6",
     title: "Bluetooth Speaker",
-    description:
-      "Portable Bluetooth speaker with 10-hour battery life. Water-resistant.",
+    description: "Portable Bluetooth speaker with 10-hour battery life. Water-resistant.",
     price: 39.99,
     image: "/placeholder.svg?height=200&width=300",
   },
-];
+]
 
 export default function StorePage() {
-  const [cart, setCart] = useState<string[]>([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cart, setCart] = useState<string[]>([])
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
 
   const addToCart = (itemId: string) => {
     if (!cart.includes(itemId)) {
-      setCart([...cart, itemId]);
+      setCart([...cart, itemId])
     }
-  };
+  }
 
   const removeFromCart = (itemId: string) => {
-    setCart(cart.filter((id) => id !== itemId));
-  };
+    setCart(cart.filter((id) => id !== itemId))
+  }
 
-  const isInCart = (itemId: string) => cart.includes(itemId);
+  const isInCart = (itemId: string) => cart.includes(itemId)
+
+  // Filter items based on search query
+  const filteredItems = storeItems.filter((item) => {
+    if (!searchQuery.trim()) return true
+
+    const query = searchQuery.toLowerCase()
+    return item.title.toLowerCase().includes(query) || item.description.toLowerCase().includes(query)
+  })
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
@@ -84,18 +87,10 @@ export default function StorePage() {
       <header className="bg-white dark:bg-gray-800 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="flex items-center gap-2">
-            <div>
-              <Image
-                src="/assets/logo.png"
-                alt="Logo"
-                width={50}
-                height={20}
-                className="rounded-full"
-              />
+            <div className="bg-blue-600 text-white p-1.5 rounded-full">
+              <FiTool size={20} />
             </div>
-            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">
-              Sleek Tech
-            </h1>
+            <h1 className="text-xl font-bold text-blue-800 dark:text-blue-400">RepairPro</h1>
           </Link>
           <nav className="hidden md:flex items-center gap-6">
             <Link
@@ -104,10 +99,7 @@ export default function StorePage() {
             >
               Repairs
             </Link>
-            <Link
-              href="/store"
-              className="text-blue-600 dark:text-blue-400 font-medium"
-            >
+            <Link href="/store" className="text-blue-600 dark:text-blue-400 font-medium">
               Store
             </Link>
             <Link
@@ -173,48 +165,81 @@ export default function StorePage() {
       </header>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-blue-800 dark:text-blue-400">
-            Store Items
-          </h1>
-          {cart.length > 0 && (
-            <Link href="/login">
-              <Button className="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-shopping-cart"
-                >
-                  <circle cx="8" cy="21" r="1" />
-                  <circle cx="19" cy="21" r="1" />
-                  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-                </svg>
-                View Cart ({cart.length})
-              </Button>
-            </Link>
-          )}
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {storeItems.map((item) => (
-            <StoreItemCard
-              key={item.id}
-              item={{
-                ...item,
-                price: item.price, // Keep the numeric value the same
-              }}
-              isInCart={isInCart(item.id)}
-              onAddToCart={() => addToCart(item.id)}
-              onRemoveFromCart={() => removeFromCart(item.id)}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+          <h1 className="text-2xl font-bold text-blue-800 dark:text-blue-400">Store Items</h1>
+          <div className="flex items-center gap-4 w-full md:w-auto">
+            <SearchBar
+              placeholder="Search store items..."
+              onSearch={setSearchQuery}
+              initialQuery={searchQuery}
+              className="w-full md:w-64"
             />
-          ))}
+            {cart.length > 0 && (
+              <Link href="/login">
+                <Button className="flex items-center gap-2 whitespace-nowrap">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-shopping-cart"
+                  >
+                    <circle cx="8" cy="21" r="1" />
+                    <circle cx="19" cy="21" r="1" />
+                    <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+                  </svg>
+                  View Cart ({cart.length})
+                </Button>
+              </Link>
+            )}
+          </div>
         </div>
+
+        {filteredItems.length === 0 ? (
+          <div className="text-center py-12">
+            <div className="mx-auto w-16 h-16 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-400 mb-4">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-search"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+            </div>
+            <h2 className="text-xl font-medium mb-2">No items found</h2>
+            <p className="text-gray-500 dark:text-gray-400">
+              We couldn't find any items matching "{searchQuery}". Try a different search term.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredItems.map((item) => (
+              <StoreItemCard
+                key={item.id}
+                item={{
+                  ...item,
+                  price: item.price, // Keep the numeric value the same
+                }}
+                isInCart={isInCart(item.id)}
+                onAddToCart={() => addToCart(item.id)}
+                onRemoveFromCart={() => removeFromCart(item.id)}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Footer */}
@@ -223,54 +248,35 @@ export default function StorePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <Link href="/" className="flex items-center gap-2 mb-4">
-                  <div>
-                                  <Image
-                                    src="/assets/logo.png"
-                                    alt="Logo"
-                                    width={50}
-                                    height={20}
-                                    className="rounded-full"
-                                  />
-                                </div>
-                <h3 className="text-lg font-bold">SleekTech</h3>
+                <div className="bg-blue-600 text-white p-1.5 rounded-full">
+                  <FiTool size={20} />
+                </div>
+                <h3 className="text-lg font-bold">RepairPro</h3>
               </Link>
               <p className="text-gray-300">
-                Professional repair services and quality tech accessories for
-                all your needs.
+                Professional repair services and quality tech accessories for all your needs.
               </p>
             </div>
             <div>
               <h3 className="text-lg font-bold mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link
-                    href="/repairs"
-                    className="text-gray-300 hover:text-white"
-                  >
+                  <Link href="/repairs" className="text-gray-300 hover:text-white">
                     Repair Services
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/store"
-                    className="text-gray-300 hover:text-white"
-                  >
+                  <Link href="/store" className="text-gray-300 hover:text-white">
                     Store
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/login"
-                    className="text-gray-300 hover:text-white"
-                  >
+                  <Link href="/login" className="text-gray-300 hover:text-white">
                     Login
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    href="/register"
-                    className="text-gray-300 hover:text-white"
-                  >
+                  <Link href="/register" className="text-gray-300 hover:text-white">
                     Register
                   </Link>
                 </li>
@@ -287,12 +293,10 @@ export default function StorePage() {
             </div>
           </div>
           <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">
-            <p>
-              &copy; {new Date().getFullYear()} SleekTechEES. All rights reserved.
-            </p>
+            <p>&copy; {new Date().getFullYear()} RepairPro. All rights reserved.</p>
           </div>
         </div>
       </footer>
     </div>
-  );
+  )
 }
